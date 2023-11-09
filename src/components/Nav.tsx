@@ -1,9 +1,10 @@
 import { useState } from "react";
+import perfil from "../assets/products-img/perfil-ft.jpeg"
 
 export function Nav() {
   const [menu, setMenu] = useState<boolean>(false);
 
-  const showOptions = () => { 
+  const showOptions = () => {
     if(menu){
       setMenu(false);
     } else {
@@ -12,27 +13,29 @@ export function Nav() {
   }
 
   return (
-    <nav className="fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
-      <h1 className="text-white font-semibold text-xl">BurguerLovers</h1>
+    <nav className="z-10 fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
+      <h1 className="text-white font-semibold text-xl">Sneakerhead</h1>
 
-      <ul className="flex flex-row items-center justify-center text-white">
-        <li className="cursor-pointer mx-5 font-medium">Menu</li>
-        <li className="cursor-pointer mr-3">
+      <ul className="flex flex-row items-center justify-center text-white gap-4 px-2">
+        <li className="cursor-pointer">
           <div
             onClick={() => showOptions()}
             className=" flex items-center justify-center cursor-pointer">
-              <i className="text-[15px] fa-solid fa-user"></i>
+              <i className="text-[20px] fa-solid fa-user"></i>
             </div>
         </li>
+        <li className="cursor-pointer">
+          <i className="text-[20px] fa-regular fa-heart"></i>
+        </li>
         <li className="cursor-pointer ">
-          <i className="text-[14.5px] fa-solid fa-cart-shopping"></i>
+          <i className="text-[19px] fa-solid fa-cart-shopping"></i>
         </li>
       </ul>
 
-      <div className={`absolute ${!menu ? 'hidden' : ' '} w-[250px] h-[250px] bg-white right-[15px] top-[46px] rounded-md px-2`}>
-        <div className="flex items-center gap-2 border-b-[1.5px] border-black p-2">
-          <i className="text-[25px] bg-slate-300 rounded-full p-2.5 fa-regular fa-user"></i>
-          <h1>Ronaldo Rafael F.</h1>
+      <div className={`absolute ${!menu ? 'hidden' : ' '} w-[250px] h-[250px] bg-white right-[90px] top-[45px] rounded-md px-2`}>
+        <div className="flex items-center gap-3 border-b-[1.5px] border-black p-2">
+          <img src={perfil} className="w-[50px] rounded-full"/>
+          <h1 className="text-lg">User</h1>
         </div>
         <div className="w-full">
           <ul className="px-1">

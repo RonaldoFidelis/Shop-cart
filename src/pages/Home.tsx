@@ -1,11 +1,11 @@
 import { LogoHome } from "../components/LogoHome";
-import { Menu } from "../components/Menu";
+import { Sneaker } from "../components/Sneaker";
 
 export function Home() {
   return (
     <div className="flex flex-col">
       <LogoHome/>
-      <Menu/>
+      <Sneaker/>
     </div>
   )
 }
