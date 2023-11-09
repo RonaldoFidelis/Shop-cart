@@ -1,21 +1,34 @@
 import { products } from "../modules/Products"
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-type Sneaker = {
+type Data = {
   img: string;
   name: string;
   color: string;
   price: number;
   size: number[];
   id: string;
+  quatity?:number;
 }
 
 export function Sneaker() {
+  const { cart, setCart } = useContext(CartContext);
 
-  const addedToCart = (item: Sneaker): void => {
-    console.log(item);
-  }
+  const addedToCart = (item: Data): void => {
+    const itemIndex = cart.findIndex((product:Data) => product.id === item.id);
 
-  const addedToFavorite = (item: Sneaker): void => {
+    if (itemIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[itemIndex].quantity += 1;
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, { ...item, quantity: 1 }]);
+    }
+  };
+
+
+  const addedToFavorite = (item: Data): void => {
     console.log(item);
   }
 

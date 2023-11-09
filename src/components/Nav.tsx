@@ -1,5 +1,6 @@
 import { useState } from "react";
 import perfil from "../assets/products-img/perfil-ft.jpeg"
+import { Link } from "react-router-dom";
 
 export function Nav() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -14,7 +15,7 @@ export function Nav() {
 
   return (
     <nav className="z-10 fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
-      <h1 className="text-white font-semibold text-xl">Sneakerhead</h1>
+      <Link to='/' className="text-white font-semibold text-xl">Sneakerhead</Link>
 
       <ul className="flex flex-row items-center justify-center text-white gap-4 px-2">
         <li className="cursor-pointer">
@@ -28,7 +29,9 @@ export function Nav() {
           <i className="text-[20px] fa-regular fa-heart"></i>
         </li>
         <li className="cursor-pointer ">
-          <i className="text-[19px] fa-solid fa-cart-shopping"></i>
+          <Link to='/cart'>
+            <i className="text-[19px] fa-solid fa-cart-shopping"></i>
+          </Link>
         </li>
       </ul>
 
