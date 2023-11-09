@@ -13,10 +13,10 @@ export function Nav() {
 
   return (
     <nav className="fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
-      <h1 className="text-white font-semibold text-xl">Hamburgueria</h1>
+      <h1 className="text-white font-semibold text-xl">BurguerLovers</h1>
 
       <ul className="flex flex-row items-center justify-center text-white">
-        <li className="cursor-pointer mx-5 font-medium">Cardápio</li>
+        <li className="cursor-pointer mx-5 font-medium">Menu</li>
         <li className="cursor-pointer mr-3">
           <div
             onClick={() => showOptions()}
