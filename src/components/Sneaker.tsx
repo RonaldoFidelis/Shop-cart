@@ -1,13 +1,22 @@
-import { products } from "../modules/products"
+import { products } from "../modules/Products"
+
+type Sneaker = {
+  img: string;
+  name: string;
+  color: string;
+  price: number;
+  size: number[];
+  id: string;
+}
 
 export function Sneaker() {
 
-  const addedToCart = (sneaker): void => {
-    console.log(sneaker)
+  const addedToCart = (item: Sneaker): void => {
+    console.log(item);
   }
 
-  const addedToFavorite = (sneaker): void => {
-    console.log(sneaker);
+  const addedToFavorite = (item: Sneaker): void => {
+    console.log(item);
   }
 
   return (

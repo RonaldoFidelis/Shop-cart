@@ -4,7 +4,6 @@ import { Cart } from "./pages/Cart";
 import { Nav } from "./components/Nav";
 
 export function App() {
-
   return (
     <BrowserRouter>
       <Nav/>
