@@ -74,8 +74,6 @@ export function Sneaker() {
 
       setCart(updatedCart);
     }
-
-    console.log(cart);
   };
 
 
