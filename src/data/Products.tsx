@@ -18,7 +18,7 @@ export const products: {
       'name': 'Air Jordan 1',
       'color': 'Red/Black',
       'price': 4500,
-      'size': [40, 42, 43],
+      'size': [43, 44, 46,48],
       'id': '1'
     },
     {
@@ -26,7 +26,7 @@ export const products: {
       'name': 'Air jordan 4',
       'color': 'Red/Black',
       'price': 2500,
-      'size': [40, 42, 43],
+      'size': [44, 45, 46],
       'id': '2'
     },
     {
@@ -34,7 +34,7 @@ export const products: {
       'name': 'Nike air',
       'color': 'White/Yellow',
       'price': 1800,
-      'size': [40, 42, 43],
+      'size': [42, 43, 44],
       'id': '3'
     },
     {
@@ -42,7 +42,7 @@ export const products: {
       'name': 'Nike air',
       'color': 'white/Ocean blue',
       'price': 2000,
-      'size': [40, 42, 43],
+      'size': [41, 43, 44],
       'id': '4'
     },
     {
@@ -50,7 +50,7 @@ export const products: {
       'name': 'Yeezy 700',
       'color': 'Gray/White',
       'price': 6000,
-      'size': [40, 42, 43],
+      'size': [42, 43, 45],
       'id': '5'
     },
     {
@@ -58,7 +58,7 @@ export const products: {
       'name': 'chunky Dunky',
       'color': 'Multicolor',
       'price': 6800,
-      'size': [40, 42, 43],
+      'size': [42, 43, 45],
       'id': '6'
     },
   ];

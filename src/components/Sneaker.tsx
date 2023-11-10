@@ -1,4 +1,4 @@
-import { products } from "../modules/Products"
+import { products } from "../data/Products"
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
@@ -44,7 +44,7 @@ export function Sneaker() {
             <button
               className="z-10 absolute flex items-center justify-center cursor-pointer top-[10px] right-4"
               onClick={() => addedToFavorite(sneaker)}>
-              <i className="block text-[17px] fa-regular fa-heart"></i>
+              <i className="block hover:bg-[#F30000] p-1 rounded-full duration-500 text-[17px] fa-regular fa-heart"></i>
             </button>
             <div className='flex max-w-[140px] max-h-[140px] items-center justify-center overflow-hidden bg-black rounded-full p-2'>
               <img className='w-[100%]' src={sneaker.img} alt="" />
@@ -55,12 +55,12 @@ export function Sneaker() {
                 {sneaker.size.map((size,id) => (
                   <li
                     key={id}
-                    className="bg-slate-300 p-1 rounded-md">
+                    className="cursor-pointer p-1 rounded-md bg-slate-200 hover:bg-slate-300 duration-500">
                     <p className="text-sm font-medium">{size}</p>
                   </li>
                 ))}
               </ul>
-              <h3 className='text-base font-semibold'>$ {sneaker.price}</h3>
+              <h3 className='text-base font-medium'>$ {sneaker.price}</h3>
             </div>
             <div className="flex flex-row items-center justify-center gap-2">
               <button
