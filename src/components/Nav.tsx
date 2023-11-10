@@ -1,42 +1,40 @@
-import { useState, useEffect, useRef } from "react";
 import perfil from "../assets/products-img/perfil-ft.jpeg";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 export function Nav() {
   const [menu, setMenu] = useState<boolean>(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const showOptions = () => {
     setMenu(!menu);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent|TouchEvent) => {
+
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setMenu(false);
       }
     };
+
     document.addEventListener("click", handleClickOutside);
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  },[]);
 
   return (
     <nav className="z-10 fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
       <Link to='/' className="text-white font-semibold text-xl">Sneakerhead</Link>
 
       <ul className="flex flex-row items-center justify-center text-white gap-4 px-2">
-        <li className="cursor-pointer" ref={menuRef}>
+        <div className="cursor-pointer" ref={menuRef}>
           <div onClick={showOptions}>
             <i className="text-[20px] fa-solid fa-user"></i>
           </div>
-          {menu && (
-            <div className="absolute w-[250px] h-[250px] bg-white right-[90px] top-[45px] rounded-md px-2">
-            </div>
-          )}
-        </li>
+        </div>
         <li className="cursor-pointer">
           <Link to="/favorite">
             <i className="text-[20px] fa-regular fa-heart"></i>
