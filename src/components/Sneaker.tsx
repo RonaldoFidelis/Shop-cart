@@ -110,7 +110,7 @@ export function Sneaker() {
                         onClick={() => chooseSize(sneaker.id, size)}
                         className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
                       />
-                      <span className='select-size'>{size}</span>
+                      <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
                     </label>
                   ))}
                 </li>

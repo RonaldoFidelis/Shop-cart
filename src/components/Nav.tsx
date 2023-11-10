@@ -47,7 +47,7 @@ export function Nav() {
             {cart.length > 0 ? (
               <span className="absolute flex items-center justify-center right-[10px] top-[4px] md:right-2 md:top-1 bg-green-500 p-[6px] rounded-full text-xs text-white"></span>
             ) : ('')}
-              <i className="text-[19px] fa-solid fa-cart-shopping"></i>
+            <i className="text-[19px] fa-solid fa-cart-shopping"></i>
           </Link>
         </li>
       </ul>
@@ -55,8 +55,10 @@ export function Nav() {
       <div
         className={`absolute ${!menu ? 'hidden' : ' '} w-[250px] h-[250px] bg-white right-[90px] top-[45px] rounded-md px-2 shadow-xl`}>
         <div className="flex items-center gap-3 border-b-[1.5px] border-black p-2">
-          <img src={perfil} className="w-[50px] rounded-full" />
-          <h1 className="text-lg">User</h1>
+          <span className="bg-slate-300 px-3 py-2 rounded-full">
+            <i className="text-[30px] fa-regular fa-user"></i>
+          </span>
+          <h1 className="text-xl">User</h1>
         </div>
         <div className="w-full">
           <ul className="px-1">
