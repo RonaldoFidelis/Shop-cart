@@ -1,0 +1,10 @@
+.select-size {
+  padding: 3px;
+  border-radius: 5px;
+  border: 2px solid #E2E8F0;
+  background: #E2E8F0;
+}
+
+.radio-size:checked + .select-size {
+  border-color: #F30000;
+}

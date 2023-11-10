@@ -1,8 +1,9 @@
 import { products } from "../data/Products"
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
+import '../style/SneakerComponents.css'
 
-type Data = {
+type FormatSneaker = {
   img: string;
   name: string;
   color: string;
@@ -12,76 +13,71 @@ type Data = {
   quantity?: number;
 }
 
-type Sized = {
+type FormatSize = {
   id: string;
   size: number[]
 }
 
 export function Sneaker() {
   const { cart, setCart } = useContext(CartContext);
-  const [selectedSizes, setSelectedSizes] = useState<Sized[]>([]);
+  const [size, setSize] = useState<FormatSize[]>([])
 
-  const chooseSize = (productId: string, size: number): void => {
-    const existingSizingIndex = selectedSizes.findIndex((item) => item.id === productId);
+  const chooseSize = (id: string, valueSize: number): void => {
+    const index = size.findIndex((item) => item.id === id);
 
-    if (existingSizingIndex !== -1) {
-      // Produto encontrado na lista, então atualize o tamanho existente ou adicione se não existir
-      const updatedSizings = [...selectedSizes];
-      const existingSizing = updatedSizings[existingSizingIndex];
+    if (index !== -1) { // se retorna  alguma coisa diferente de -1 é verdadeiro
+      const updateSize = [...size];
+      const currentSize = updateSize[index];
 
-      // Verifica se o tamanho já existe na lista para este produto
-      if (!existingSizing.size.includes(size)) {
-        existingSizing.size.push(size);
+      if (!currentSize.size.includes(valueSize)) {
+        currentSize.size.push(valueSize);
       }
 
-      setSelectedSizes(updatedSizings);
+      setSize(updateSize);
     } else {
-      // Produto não encontrado na lista, adicione um novo item
-      setSelectedSizes((prevSizes) => [...prevSizes, { id: productId, size: [size] }]);
+      setSize((previusValue) => [...previusValue, { id: id, size: [valueSize] }])
     }
-
   };
 
-  const addedToCart = (item: Data): void => {
-    if (selectedSizes.length === 0) {
-      const itemIndex = cart.findIndex((product: Data) => product.id === item.id);
+  const addedToCart = (item: FormatSneaker): void => {
+    // Verifica se pelo menos um tamanho foi selecionado
+    if (size.length === 0) {
+      console.error("Por favor, selecione pelo menos um tamanho antes de adicionar ao carrinho.");
+      return;
+    }
 
-      if (itemIndex !== -1) {
+    // Verifica se o tamanho selecionado pertence à lista de tamanhos disponíveis para o item
+    const validSizes = size.find((s) => s.id === item.id)?.size || [];
+    if (validSizes.length === 0) {
+      console.error("Por favor, selecione um tamanho válido para este item.");
+      return;
+    }
+
+    const index = cart.findIndex((sneaker) => sneaker.id === item.id);
+
+    if (index !== -1) {
+      // Se o item já estiver no carrinho, verifica se o tamanho é diferente
+      const existingSizes = cart[index].size || [];
+      const newSize = validSizes.filter((size) => !existingSizes.includes(size));
+
+      if (newSize.length > 0) {
+        // Se o tamanho for diferente, adiciona o novo tamanho ao item do carrinho
         const updatedCart = [...cart];
-        updatedCart[itemIndex].quantity += item.size.length;
+        updatedCart[index].quantity = (updatedCart[index].quantity || 0) + 1;
+        updatedCart[index].size = existingSizes.concat(newSize);
         setCart(updatedCart);
       } else {
-        // Se nenhum tamanho foi selecionado, definimos quantity como 1 por padrão
-        setCart([...cart, { ...item, quantity: item.size.length }]);
+        console.error("Você já adicionou este item ao carrinho com os tamanhos selecionados.");
       }
     } else {
-      const updatedCart = [...cart];
-
-      selectedSizes.forEach((size) => {
-        const newItem = { ...item, size: size.size };
-        const itemIndex = updatedCart.findIndex(
-          (product: Data) => product.id === item.id && product.size === size.size
-        );
-
-        if (itemIndex !== -1) {
-          // Ajuste aqui para definir a quantidade como o comprimento do tamanho selecionado
-          updatedCart[itemIndex].quantity = size.size.length;
-        } else {
-          // Se um tamanho foi selecionado, usamos o comprimento de selectedSizes como quantidade
-          updatedCart.push({ ...newItem, quantity: size.size.length });
-        }
-      });
-
-      setCart(updatedCart);
+      // Se o item não estiver no carrinho, adicione-o ao carrinho com os tamanhos selecionados
+      const newItem = { ...item, quantity: 1, size: validSizes };
+      setCart((prevCart) => [...prevCart, newItem]);
     }
+
+    // Limpe os tamanhos selecionados após adicionar ao carrinho
+    setSize([]);
   };
-
-
-  const addedToFavorite = (item: Data): void => {
-    console.log(item);
-  }
-
-
 
   return (
     <section className="w-full flex flex-col items-center justify-center p-5">
@@ -94,7 +90,7 @@ export function Sneaker() {
             className=" relative flex flex-col items-center justify-center bg-[#FFFFFF] w-[200px] h-[300px] rounded-3xl gap-2 shadow-lg">
             <button
               className="absolute flex items-center justify-center cursor-pointer top-[10px] right-4"
-              onClick={() => addedToFavorite(sneaker)}>
+            >
               <i className=" block hover:bg-[#F30000] p-1 rounded-full duration-500 text-[17px] fa-regular fa-heart"></i>
             </button>
             <div className='flex max-w-[140px] max-h-[140px] items-center justify-center overflow-hidden bg-black rounded-full p-2'>
@@ -103,14 +99,21 @@ export function Sneaker() {
             <div className='flex flex-col items-center justify-center gap-1'>
               <h1 className='text-base font-medium'>{sneaker.name}</h1>
               <ul className="flex flex-row gap-2">
-                {sneaker.size.map((size, id) => (
-                  <li
-                    key={id}
-                    onClick={() => chooseSize(sneaker.id, size)}
-                    className="cursor-pointer p-1 rounded-md bg-slate-200 hover:bg-slate-300 duration-500">
-                    <p className="text-sm font-medium">{size}</p>
-                  </li>
-                ))}
+                <li className="flex gap-2">
+                  {sneaker.size.map((size, id) => (
+                    <label
+                      className="relative flex items-center justify-center"
+                      key={id}>
+                      <input
+                        type="checkbox"
+                        name={`optionsSizer_${sneaker.id}`}
+                        onClick={() => chooseSize(sneaker.id, size)}
+                        className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
+                      />
+                      <span className='select-size'>{size}</span>
+                    </label>
+                  ))}
+                </li>
               </ul>
               <h3 className='text-base font-medium'>$ {sneaker.price}</h3>
             </div>
