@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 type Sneaker = {
   img: string;
@@ -10,10 +10,9 @@ type Sneaker = {
   quatity?:number;
 }
 
-// Defina o contexto com o tipo apropriado para o carrinho
-export const CartContext = createContext();
+export const CartContext = createContext({});
 
-export const CartContextProvider = ({ children }) => {
+export const CartContextProvider = ({ children } : {children: React.ReactNode}) => {
   const [cart, setCart] = useState<Sneaker[] | undefined>([]);
 
   return (
