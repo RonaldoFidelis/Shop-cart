@@ -16,9 +16,14 @@ export function CartNotEmpty() {
 
   const decreaseQuantity = (sneaker: TypeSneaker): void => {
     const newCart = cart.map((item) => {
+      if(item.quantity == sneaker.size.length){
+        return {...item};
+      }
+
       if (item.id == sneaker.id) {
         return { ...item, quantity: Math.max((item.quantity || 1) - 1, 0) }
       }
+
       return item;
     })
     setCart(newCart);
@@ -79,7 +84,7 @@ export function CartNotEmpty() {
                       className="col-span-1 flex items-center justify-center hover:bg-slate-300 duration-500 px-2 rounded-l-full">
                       <i className="text-sm fa-solid fa-minus"></i>
                     </button>
-                    <h1 className="col-span-1 text-sm flex items-center justify-center">{sneaker.quantity || 1}</h1>
+                    <h1 className="col-span-1 text-sm flex items-center justify-center">{sneaker.quantity > sneaker.size.length ? sneaker.quantity : sneaker.size.length}</h1>
                     <button
                       onClick={() => incrementQuantity(sneaker)}
                       className="col-span-1 flex items-center justify-center hover:bg-slate-300 duration-500 px-2 rounded-r-full">
