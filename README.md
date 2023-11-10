@@ -7,7 +7,8 @@ Aplicação web de uma hamburgueria com funcionalidade de carrinho de compras.
 
 <br>
 
-> Acessar: 
+> Acessar: <a href="https://shop-cart-9cuo.vercel.app/" target="_blank">Link</a>
+
 
 ## Visão Geral
 
