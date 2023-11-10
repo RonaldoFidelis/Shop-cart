@@ -7,7 +7,7 @@ type Sneaker = {
   price: number;
   size: number[];
   id: string;
-  quantity?: number;
+  quantity: number;
 }
 
 type CartContextType = {
@@ -15,7 +15,7 @@ type CartContextType = {
   setCart: React.Dispatch<React.SetStateAction<Sneaker[]>>;
 };
 
-export const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType>({} as CartContextType);
 
 type CartContextProviderProps = {
   children: ReactNode;

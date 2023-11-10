@@ -20,11 +20,15 @@ export function Sneaker() {
 
     if (itemIndex !== -1) {
       const updatedCart = [...cart];
-      updatedCart[itemIndex].quantity += 1;
+      if(typeof updatedCart !== 'undefined'){
+        updatedCart[itemIndex].quantity += 1;
+      }
       setCart(updatedCart);
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
     }
+
+    console.log(cart);
   };
 
 
