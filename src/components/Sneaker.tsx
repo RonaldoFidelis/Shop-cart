@@ -43,17 +43,16 @@ export function Sneaker() {
   };
 
   const addedToCart = (item: Data): void => {
-    if (selectedSizes.length == 0) {
+    if (selectedSizes.length === 0) {
       const itemIndex = cart.findIndex((product: Data) => product.id === item.id);
 
       if (itemIndex !== -1) {
         const updatedCart = [...cart];
-        if (typeof updatedCart !== 'undefined') {
-          updatedCart[itemIndex].quantity += 1;
-        }
+        updatedCart[itemIndex].quantity += item.size.length;
         setCart(updatedCart);
       } else {
-        setCart([...cart, { ...item, quantity: 1 }]);
+        // Se nenhum tamanho foi selecionado, definimos quantity como 1 por padrão
+        setCart([...cart, { ...item, quantity: item.size.length }]);
       }
     } else {
       const updatedCart = [...cart];
@@ -65,9 +64,11 @@ export function Sneaker() {
         );
 
         if (itemIndex !== -1) {
-          updatedCart[itemIndex].quantity += 1;
+          // Ajuste aqui para definir a quantidade como o comprimento do tamanho selecionado
+          updatedCart[itemIndex].quantity = size.size.length;
         } else {
-          updatedCart.push({ ...newItem, quantity: 1 });
+          // Se um tamanho foi selecionado, usamos o comprimento de selectedSizes como quantidade
+          updatedCart.push({ ...newItem, quantity: size.size.length });
         }
       });
 
@@ -76,6 +77,7 @@ export function Sneaker() {
 
     console.log(cart);
   };
+
 
   const addedToFavorite = (item: Data): void => {
     console.log(item);

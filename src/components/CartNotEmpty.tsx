@@ -51,6 +51,7 @@ export function CartNotEmpty() {
     total();
   }, [cart])
 
+  console.log(cart)
   return (
     <div className="w-full min-h-screen">
       <div className="md:grid md:grid-cols-3 p-5 gap-1">
