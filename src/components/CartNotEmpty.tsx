@@ -53,7 +53,7 @@ export function CartNotEmpty() {
   }, [cart])
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen pt-20">
       <div className="md:grid md:grid-cols-3 p-5 gap-1">
         <div className="col-span-2 flex flex-col gap-5 items-center">
           {cart.map((sneaker, key) => (

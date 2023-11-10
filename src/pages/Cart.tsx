@@ -7,7 +7,7 @@ export function Cart() {
   const {cart} = useContext(CartContext);
 
   return (
-    <div className="w-full min-h-screen py-20">
+    <div className="w-full min-h-screen">
       {cart.length === 0 ? (
         <CartEmpty/>
       ):(
