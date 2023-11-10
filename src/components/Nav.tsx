@@ -48,7 +48,7 @@ export function Nav() {
       </ul>
 
       <div
-        className={`absolute ${!menu ? 'hidden' : ' '} w-[250px] h-[250px] bg-white right-[90px] top-[45px] rounded-md px-2`}>
+        className={`absolute ${!menu ? 'hidden' : ' '} w-[250px] h-[250px] bg-white right-[90px] top-[45px] rounded-md px-2 shadow-xl`}>
         <div className="flex items-center gap-3 border-b-[1.5px] border-black p-2">
           <img src={perfil} className="w-[50px] rounded-full" />
           <h1 className="text-lg">User</h1>
