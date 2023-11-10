@@ -1,8 +1,10 @@
 import perfil from "../assets/products-img/perfil-ft.jpeg";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 export function Nav() {
+  const { cart } = useContext(CartContext);
   const [menu, setMenu] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -11,7 +13,7 @@ export function Nav() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent|TouchEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
 
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setMenu(false);
@@ -23,7 +25,7 @@ export function Nav() {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  },[]);
+  }, []);
 
   return (
     <nav className="z-50 fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
@@ -42,7 +44,10 @@ export function Nav() {
         </li>
         <li className="cursor-pointer">
           <Link to="/cart">
-            <i className="text-[19px] fa-solid fa-cart-shopping"></i>
+            {cart.length > 0 ? (
+              <span className="absolute flex items-center justify-center right-[10px] top-[4px] md:right-2 md:top-1 bg-green-500 p-[6px] rounded-full text-xs text-white"></span>
+            ) : ('')}
+              <i className="text-[19px] fa-solid fa-cart-shopping"></i>
           </Link>
         </li>
       </ul>
@@ -98,6 +103,6 @@ export function Nav() {
           </ul>
         </div>
       </div>
-    </nav>
+    </nav >
   )
 }
