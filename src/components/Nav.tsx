@@ -1,4 +1,3 @@
-import perfil from "../assets/products-img/perfil-ft.jpeg";
 import { useEffect, useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
