@@ -46,9 +46,9 @@ export function Sneaker() {
             key={id}
             className=" relative flex flex-col items-center justify-center bg-[#FFFFFF] w-[200px] h-[300px] rounded-3xl gap-2 shadow-lg">
             <button
-              className="z-10 absolute flex items-center justify-center cursor-pointer top-[10px] right-4"
+              className="absolute flex items-center justify-center cursor-pointer top-[10px] right-4"
               onClick={() => addedToFavorite(sneaker)}>
-              <i className="block hover:bg-[#F30000] p-1 rounded-full duration-500 text-[17px] fa-regular fa-heart"></i>
+              <i className=" block hover:bg-[#F30000] p-1 rounded-full duration-500 text-[17px] fa-regular fa-heart"></i>
             </button>
             <div className='flex max-w-[140px] max-h-[140px] items-center justify-center overflow-hidden bg-black rounded-full p-2'>
               <img className='w-[100%]' src={sneaker.img} alt="" />

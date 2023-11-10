@@ -26,7 +26,7 @@ export function Nav() {
   },[]);
 
   return (
-    <nav className="z-10 fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
+    <nav className="z-50 fixed flex items-center justify-between p-2 w-full h-[40px] bg-black">
       <Link to='/' className="text-white font-semibold text-xl">Sneakerhead</Link>
 
       <ul className="flex flex-row items-center justify-center text-white gap-4 px-2">
