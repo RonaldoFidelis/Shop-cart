@@ -1,33 +1,32 @@
-# BurguerLovers (Em construção)
+# Sneaker Heads (Em construção)
 
-Aplicação web de uma hamburgueria com funcionalidade de carrinho de compras.
-
-<br>
-
+Este é um projeto de aplicação web de e-commerce ilustrativo de Sneakers (tênis).
 
 <br>
 
-> Acessar: <a href="https://shop-cart-9cuo.vercel.app/" target="_blank">Link</a>
+<br>
 
+> Acesse o projeto: <a href="https://shop-cart-9cuo.vercel.app/" target="_blank">Link</a>
 
 ## Visão Geral
 
-O projeto é uma aplicação web para uma hamburgueria que permite aos usuários visualizar um cardápio, adicionar itens ao carrinho de compras. Este projeto foi desenvolvido usando React e React Router para a gestão de rotas.
+A aplicação web foi criada como um e-commerce de sneakers, desenvolvido exclusivamente para fins de comprovação técnica. Permite aos usuários visualizar sneakers, adicionar itens ao carrinho de compras, favoritar sneakers e acessar áreas do usuário. O projeto foi desenvolvido utilizando Typescript, ReactJS e React Router para a gestão de rotas.
 
 ## Tecnologias Utilizadas
 
-- **[ Typescript ](https://www.typescriptlang.org/)**
-- **[ Reactjs ](https://react.dev/)**
-- **[ React Router ](https://reactrouter.com/en/main)**
-- **[ HTML ](https://developer.mozilla.org/pt-BR/docs/Web/HTML)**
-- **[ CSS ](https://developer.mozilla.org/pt-BR/docs/Web/CSS)**
-- **[ Tailwindcss ](https://tailwindcss.com/)**
+- **[Typescript](https://www.typescriptlang.org/)**
+- **[ReactJS](https://react.dev/)**
+- **[NodeJS](https://nodejs.org/en)**
+- **[React Router](https://reactrouter.com/en/main)**
+- **[HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML)**
+- **[CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)**
+- **[Tailwind CSS](https://tailwindcss.com/)**
 
-## 📝 Maiores aprendizados
+## 📝 Maiores Aprendizados
 
-- Rotas e dados dinâmicos.
+- Manipulação de rotas e uso da Context API.
 
-## Contato:
+## Contato
 
-- <a href="mailto:ronaldofidelis.ti@gmail.com" target="_blank">E-mail</a>
-- <a href="https://github.com/RonaldoFidelis" target="_blank">GitHub</a>
+- **E-mail:** [ronaldofidelis.ti@gmail.com](mailto:ronaldofidelis.ti@gmail.com)
+- **GitHub:** [RonaldoFidelis](https://github.com/RonaldoFidelis)
