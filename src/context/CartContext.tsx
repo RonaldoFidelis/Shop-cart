@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 
 type Sneaker = {
   img: string;
@@ -7,13 +7,22 @@ type Sneaker = {
   price: number;
   size: number[];
   id: string;
-  quatity?:number;
+  quantity?: number;
 }
 
-export const CartContext = createContext({});
+type CartContextType = {
+  cart: Sneaker[];
+  setCart: React.Dispatch<React.SetStateAction<Sneaker[]>>;
+};
 
-export const CartContextProvider = ({ children } : {children: React.ReactNode}) => {
-  const [cart, setCart] = useState<Sneaker[] | undefined>([]);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
+
+type CartContextProviderProps = {
+  children: ReactNode;
+};
+
+export const CartContextProvider: React.FC<CartContextProviderProps> = ({ children }) => {
+  const [cart, setCart] = useState<Sneaker[]>([]);
 
   return (
     <CartContext.Provider value={{ cart, setCart }}>

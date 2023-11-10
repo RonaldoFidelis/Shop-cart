@@ -9,7 +9,7 @@ type Data = {
   price: number;
   size: number[];
   id: string;
-  quatity?:number;
+  quantity?:number;
 }
 
 export function Sneaker() {
