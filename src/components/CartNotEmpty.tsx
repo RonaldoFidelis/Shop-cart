@@ -34,9 +34,9 @@ export function CartNotEmpty() {
     setCart(newCart);
   }
 
-  const deleteWish = (sneaker: TypeSneaker):void => {
+  const deleteWish = (sneaker: TypeSneaker): void => {
     const newCart = cart.filter((item) => {
-      if(item.id !== sneaker.id){
+      if (item.id !== sneaker.id) {
         return item
       }
     })
@@ -64,8 +64,10 @@ export function CartNotEmpty() {
               </div>
               <div className="flex flex-col w-full">
                 <h1 className="md:text-lg font-medium flex items-center">{sneaker.name}</h1>
-                <span>Size:{sneaker.size.map((size) => (
-                  <button className="p-1 rounded-md bg-slate-200 hover:bg-slate-300 duration-500 mx-1 text-sm font-light">{size}</button>
+                <span>Size:{sneaker.size.map((size, key) => (
+                  <button
+                    key={key}
+                    className="p-1 rounded-md bg-slate-200 hover:bg-slate-300 duration-500 mx-1 text-sm font-light">{size}</button>
                 ))}
                 </span>
                 <div className="mt-5 flex gap-5">
