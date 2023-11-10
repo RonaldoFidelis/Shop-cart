@@ -18,7 +18,7 @@ export const products: {
       'name': 'Air Jordan 1',
       'color': 'Red/Black',
       'price': 4500,
-      'size': [43, 44, 46,48],
+      'size': [44, 46,48],
       'id': '1'
     },
     {
