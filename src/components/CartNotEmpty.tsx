@@ -40,11 +40,7 @@ export function CartNotEmpty() {
   }
 
   const deleteWish = (sneaker: TypeSneaker): void => {
-    const newCart = cart.filter((item) => {
-      if (item.id !== sneaker.id) {
-        return item
-      }
-    })
+    const newCart = cart.filter((item) => item.id != sneaker.id)
     setCart(newCart);
   }
 
@@ -56,7 +52,6 @@ export function CartNotEmpty() {
     total();
   }, [cart])
 
-  console.log(cart)
   return (
     <div className="w-full min-h-screen">
       <div className="md:grid md:grid-cols-3 p-5 gap-1">
