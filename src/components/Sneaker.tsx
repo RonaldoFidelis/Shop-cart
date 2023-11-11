@@ -40,30 +40,31 @@ export function Sneaker() {
   };
 
   const addedToCart = (item: FormatSneaker): void => {
-    // Verifica se pelo menos um tamanho foi selecionado
+    // Verifica se pelo menos um tamanho foi selecionado, independente do item, só está verificandp que o usuario selecionou algum tamanho
     if (size.length === 0) {
       console.error("Por favor, selecione pelo menos um tamanho antes de adicionar ao carrinho.");
       return;
     }
 
-    // Verifica se o tamanho selecionado pertence à lista de tamanhos disponíveis para o item
+    // Verificando se o id do tamanho selecionado bate com o id do item que estamos tentando adicionar ao carrinho, caso ele não encontre, usei o ?. (Optional Chaining), para retorna um array vazio caso a condição não seja atendida.
     const validSizes = size.find((s) => s.id === item.id)?.size || [];
-    if (validSizes.length === 0) {
+    if (validSizes.length === 0) { // Se a condição for atendida, o tamanho do sneaker que estamos tentando adicionar ao carrinho não foi selecionado
       console.error("Por favor, selecione um tamanho válido para este item.");
       return;
     }
 
+    // Verificando se o item está no carrinho de compra
     const index = cart.findIndex((sneaker) => sneaker.id === item.id);
 
-    if (index !== -1) {
-      // Se o item já estiver no carrinho, verifica se o tamanho é diferente
+    if (index !== -1) {// Se o item já estiver no carrinho, verifica se o tamanho selecionado é diferente
       const existingSizes = cart[index].size || [];
       const newSize = validSizes.filter((size) => !existingSizes.includes(size));
 
       if (newSize.length > 0) {
         // Se o tamanho for diferente, adiciona o novo tamanho ao item do carrinho
         const updatedCart = [...cart];
-        updatedCart[index].quantity = (updatedCart[index].quantity || 0) + 1;
+        /**(updatedCart[index].quantity || 0): Usa o operador de coalescência nula (||) para fornecer um valor padrão caso updatedCart[index].quantity seja null ou undefined. Se updatedCart[index].quantity existir, ela manterá o seu valor; caso contrário, será substituído por 0 */
+        updatedCart[index].quantity = (updatedCart[index].quantity || 0) + validSizes.length;
         updatedCart[index].size = existingSizes.concat(newSize);
         setCart(updatedCart);
       } else {
@@ -71,14 +72,14 @@ export function Sneaker() {
       }
     } else {
       // Se o item não estiver no carrinho, adicione-o ao carrinho com os tamanhos selecionados
-      const newItem = { ...item, quantity: 1, size: validSizes };
+      const newItem = { ...item, quantity: validSizes.length, size: validSizes };
       setCart((prevCart) => [...prevCart, newItem]);
     }
-
-    // Limpe os tamanhos selecionados após adicionar ao carrinho
+    // Limpando os tamanhos selecionados após adicionar o item ao carrinho
     setSize([]);
   };
 
+  console.log(cart);
   return (
     <section className="w-full flex flex-col items-center justify-center p-5">
       <h1 className="text-3xl font-semibold mb-5">Sneaker's</h1>
