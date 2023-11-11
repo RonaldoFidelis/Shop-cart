@@ -6,7 +6,7 @@ Este é um projeto de aplicação web de e-commerce ilustrativo de Sneakers (tê
 
 <br>
 
-> Acesse o projeto: <a href="https://shop-cart-9cuo.vercel.app/" target="_blank">Link</a>
+> Acesse o projeto: <a href="https://shop-cart-virid.vercel.app/" target="_blank">Link</a>
 
 ## Visão Geral
 
