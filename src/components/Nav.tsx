@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 export function Nav() {
-  const { cart } = useContext(CartContext);
+  const { cart, favorite } = useContext(CartContext);
   const [menu, setMenu] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,13 +38,16 @@ export function Nav() {
         </div>
         <li className="cursor-pointer">
           <Link to="/favorite">
+            {favorite.length > 0 ? (
+              <span className="absolute flex items-center justify-center right-[46px] top-[3px] bg-[#F30000] p-[6px] rounded-full text-xs text-white"></span>
+            ) : ('')}
             <i className="text-[20px] fa-regular fa-heart"></i>
           </Link>
         </li>
         <li className="cursor-pointer">
           <Link to="/cart">
             {cart.length > 0 ? (
-              <span className="absolute flex items-center justify-center right-[10px] top-[4px] md:right-2 md:top-1 bg-green-500 p-[6px] rounded-full text-xs text-white"></span>
+              <span className="absolute flex items-center justify-center right-[11px] top-[3px] md:right-2 md:top-1 bg-green-500 p-[6px] rounded-full text-xs text-white"></span>
             ) : ('')}
             <i className="text-[19px] fa-solid fa-cart-shopping"></i>
           </Link>
