@@ -2,11 +2,9 @@ import { useCart } from "../hooks/useCart"
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
-
 export function FavoriteNotEmpty() {
-  const {favorite} = useContext(CartContext);
-  const {addedToCart, chooseSize, deleteWish} = useCart()
-
+  const { favorite } = useContext(CartContext);
+  const { addedToCart, chooseSize, deleteWish } = useCart()
 
   const handleSubmit = (): void => { }
 

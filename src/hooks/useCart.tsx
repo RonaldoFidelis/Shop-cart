@@ -17,7 +17,7 @@ type FormatSneaker = {
 }
 
 export function useCart() {
-  
+
   const { cart, setCart, favorite, setFavorite } = useContext(CartContext);
   const [size, setSize] = useState<FormatSize[]>([]);
 
@@ -96,5 +96,5 @@ export function useCart() {
     }
   }
 
-  return {addedToCart, chooseSize, deleteWish , addedToFavorite}
+  return { addedToCart, chooseSize, deleteWish, addedToFavorite }
 }
