@@ -1,79 +1,11 @@
-import { useContext, useState } from "react"
-import { CartContext } from "../context/CartContext"
+import { useCart } from "../hooks/useCart"
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-type TypeSneaker = {
-  img: string;
-  name: string;
-  color: string;
-  price: number;
-  size: number[];
-  id: string;
-  quantity?: number;
-}
-
-type FormatSize = {
-  id: string;
-  size: number[]
-}
 
 export function FavoriteNotEmpty() {
-  const { cart, setCart, favorite, setFavorite } = useContext(CartContext);
-  const [size, setSize] = useState<FormatSize[]>([])
-
-  const deleteWish = (sneaker: TypeSneaker): void => {
-    const newCart = favorite.filter((item) => item.id != sneaker.id)
-    setFavorite(newCart);
-  }
-
-  const chooseSize = (id: string, valueSize: number): void => {
-    const index = size.findIndex((item) => item.id === id);
-
-    if (index !== -1) {
-      const updateSize = [...size];
-      const currentSize = updateSize[index];
-
-      if (!currentSize.size.includes(valueSize)) {
-        currentSize.size.push(valueSize);
-      }
-
-      setSize(updateSize);
-    } else {
-      setSize((previusValue) => [...previusValue, { id: id, size: [valueSize] }])
-    }
-  };
-
-  const addedToCart = (item: TypeSneaker): void => {
-    if (size.length === 0) {
-      console.error("Por favor, selecione pelo menos um tamanho antes de adicionar ao carrinho.");
-      return;
-    }
-
-    const validSizes = size.find((s) => s.id === item.id)?.size || [];
-    if (validSizes.length === 0) {
-      console.error("Por favor, selecione um tamanho válido para este item.");
-      return;
-    }
-
-    const index = cart.findIndex((sneaker) => sneaker.id === item.id);
-
-    if (index !== -1) {
-      const existingSizes = cart[index].size || [];
-      const newSize = validSizes.filter((size) => !existingSizes.includes(size));
-
-      if (newSize.length > 0) {
-        const updatedCart = [...cart];
-        updatedCart[index].quantity = (updatedCart[index].quantity || 0) + validSizes.length;
-        updatedCart[index].size = existingSizes.concat(newSize);
-        setCart(updatedCart);
-      } else {
-        console.error("Você já adicionou este item ao carrinho com os tamanhos selecionados.");
-      }
-    } else {
-      const newItem = { ...item, quantity: validSizes.length, size: validSizes };
-      setCart((prevCart) => [...prevCart, newItem]);
-    }
-    setSize([]);
-  };
+  const {favorite} = useContext(CartContext);
+  const {addedToCart, chooseSize, deleteWish} = useCart()
 
 
   const handleSubmit = (): void => { }
