@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { CartContext } from "../context/CartContext"
 
 type TypeSneaker = {
@@ -11,14 +11,70 @@ type TypeSneaker = {
   quantity?: number;
 }
 
+type FormatSize = {
+  id: string;
+  size: number[]
+}
 
 export function FavoriteNotEmpty() {
-  const { favorite, setFavorite } = useContext(CartContext);
+  const { cart, setCart, favorite, setFavorite } = useContext(CartContext);
+  const [size, setSize] = useState<FormatSize[]>([])
 
   const deleteWish = (sneaker: TypeSneaker): void => {
     const newCart = favorite.filter((item) => item.id != sneaker.id)
     setFavorite(newCart);
   }
+
+  const chooseSize = (id: string, valueSize: number): void => {
+    const index = size.findIndex((item) => item.id === id);
+
+    if (index !== -1) {
+      const updateSize = [...size];
+      const currentSize = updateSize[index];
+
+      if (!currentSize.size.includes(valueSize)) {
+        currentSize.size.push(valueSize);
+      }
+
+      setSize(updateSize);
+    } else {
+      setSize((previusValue) => [...previusValue, { id: id, size: [valueSize] }])
+    }
+  };
+
+  const addedToCart = (item: TypeSneaker): void => {
+    if (size.length === 0) {
+      console.error("Por favor, selecione pelo menos um tamanho antes de adicionar ao carrinho.");
+      return;
+    }
+
+    const validSizes = size.find((s) => s.id === item.id)?.size || [];
+    if (validSizes.length === 0) {
+      console.error("Por favor, selecione um tamanho válido para este item.");
+      return;
+    }
+
+    const index = cart.findIndex((sneaker) => sneaker.id === item.id);
+
+    if (index !== -1) {
+      const existingSizes = cart[index].size || [];
+      const newSize = validSizes.filter((size) => !existingSizes.includes(size));
+
+      if (newSize.length > 0) {
+        const updatedCart = [...cart];
+        updatedCart[index].quantity = (updatedCart[index].quantity || 0) + validSizes.length;
+        updatedCart[index].size = existingSizes.concat(newSize);
+        setCart(updatedCart);
+      } else {
+        console.error("Você já adicionou este item ao carrinho com os tamanhos selecionados.");
+      }
+    } else {
+      const newItem = { ...item, quantity: validSizes.length, size: validSizes };
+      setCart((prevCart) => [...prevCart, newItem]);
+    }
+    setSize([]);
+  };
+
 
   const handleSubmit = (): void => { }
 
@@ -52,13 +108,22 @@ export function FavoriteNotEmpty() {
                 <h1 className="text-lg font-medium">{sneaker.name}</h1>
                 <h3 className="text-sm font-light">{sneaker.color}</h3>
                 <ul className="mt-2 flex items-center gap-2">
-                  {sneaker.size.map((size, id) => (
-                    <li
-                      key={id}
-                      className="flex items-center justify-center bg-slate-200 p-1 rounded-md">
-                      <p className="text-sm">{size}</p>
-                    </li>
-                  ))}
+                  <li className="flex gap-2">
+                    {sneaker.size.map((size, id) => (
+                      <label
+                        className="relative flex items-center justify-center"
+                        key={id}>
+                        <input
+                          type="checkbox"
+                          name={`optionsSizer_${sneaker.id}`}
+                          onClick={() => chooseSize(sneaker.id, size)}
+                          className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
+                        />
+                        <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
+                      </label>
+                    ))}
+                  </li>
+
                 </ul>
               </div>
               <h3 className="text-base font-medium mb-2">$ {sneaker.price}</h3>
@@ -71,7 +136,9 @@ export function FavoriteNotEmpty() {
                   className="flex items-center justify-center">
                   <i className="block hover:text-[#f30000] duration-500 fa-solid fa-trash"></i>
                 </button>
-                <button className="flex items-center justify-center">
+                <button
+                  onClick={() => addedToCart(sneaker)}
+                  className="flex items-center justify-center">
                   <i className="block hover:text-[#008EF1] duration-500 fa-solid fa-cart-shopping"></i>
                 </button>
               </div>

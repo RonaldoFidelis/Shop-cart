@@ -83,11 +83,11 @@ export function Sneaker() {
     // Verificando se o sneaker já está nos favoritos
     const index = favorite.findIndex((id) => id.id === item.id);
 
-    if(index !== -1){ // Condição se caso o sneaker já esteja
+    if (index !== -1) { // Condição se caso o sneaker já esteja
       console.log('Item já está nos favoritos');
       return
     } else { // Condição se o sneaker não estiver;
-      const newFavorite = {...item}
+      const newFavorite = { ...item }
       setFavorite((previusFavorites) => [...previusFavorites, newFavorite]);
     }
   }

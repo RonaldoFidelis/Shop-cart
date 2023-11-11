@@ -123,4 +123,3 @@ export function CartNotEmpty() {
     </div>
   )
 }
-
