@@ -1,8 +1,24 @@
 import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
 
+type TypeSneaker = {
+  img: string;
+  name: string;
+  color: string;
+  price: number;
+  size: number[];
+  id: string;
+  quantity?: number;
+}
+
+
 export function FavoriteNotEmpty() {
-  const { favorite } = useContext(CartContext);
+  const { favorite, setFavorite } = useContext(CartContext);
+
+  const deleteWish = (sneaker: TypeSneaker): void => {
+    const newCart = favorite.filter((item) => item.id != sneaker.id)
+    setFavorite(newCart);
+  }
 
   const handleSubmit = (): void => { }
 
@@ -36,8 +52,10 @@ export function FavoriteNotEmpty() {
                 <h1 className="text-lg font-medium">{sneaker.name}</h1>
                 <h3 className="text-sm font-light">{sneaker.color}</h3>
                 <ul className="mt-2 flex items-center gap-2">
-                  {sneaker.size.map((size) => (
-                    <li className="flex items-center justify-center bg-slate-200 p-1 rounded-md">
+                  {sneaker.size.map((size, id) => (
+                    <li
+                      key={id}
+                      className="flex items-center justify-center bg-slate-200 p-1 rounded-md">
                       <p className="text-sm">{size}</p>
                     </li>
                   ))}
@@ -48,7 +66,9 @@ export function FavoriteNotEmpty() {
             <div className="flex flex-col items-center justify-between h-[140px]">
               <i className="text-[#f30000] text-[20px] fa-solid fa-heart py-[5.5px]"></i>
               <div className="flex flex-col items-center justify-center gap-2 mb-3">
-                <button className="flex items-center justify-center">
+                <button
+                  onClick={() => deleteWish(sneaker)}
+                  className="flex items-center justify-center">
                   <i className="block hover:text-[#f30000] duration-500 fa-solid fa-trash"></i>
                 </button>
                 <button className="flex items-center justify-center">

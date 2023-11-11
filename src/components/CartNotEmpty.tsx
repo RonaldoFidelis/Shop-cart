@@ -10,6 +10,7 @@ type TypeSneaker = {
   id: string;
   quantity: number;
 }
+
 export function CartNotEmpty() {
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState<number | null>(null);
