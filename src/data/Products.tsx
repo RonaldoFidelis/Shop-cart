@@ -4,9 +4,9 @@ import nikeAirBranco from '../assets/products-img/nike-air-branco.png'
 import nikeAirAmarelo from '../assets/products-img/nike-air-amarelo.png'
 import yeezy700 from '../assets/products-img/Yeezy-700.png'
 import chunkyDunky from '../assets/products-img/chunky-dunky.png'
-import { Database } from '../interface/database'
+import { Sneaker } from '../interface/sneaker'
 
-export const products: Database[] = [
+export const products: Sneaker[] = [
     {
       'img': jordan1,
       'name': 'Air Jordan 1',

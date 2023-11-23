@@ -1,27 +1,16 @@
-import { useCart } from "../hooks/useCart"
-import { useContext, useState } from "react";
-import { CartContext } from "../context/CartContext";
-
-type FormatItem = {
-  img: string;
-  name: string;
-  color: string;
-  price: number;
-  size: number[];
-  id: string;
-  quantity?: number;
-}
+import { useState } from "react";
+import { useMain } from "../hooks/useMain";
+import { Sneaker } from "../interface/sneaker";
 
 export function FavoriteNotEmpty() {
-  const { favorite } = useContext(CartContext);
-  const { addedToCart, chooseSize, deleteWish } = useCart();
+  const { shopCart, chooseSize, favorites } = useMain();
   const [search, setSearch] = useState<string>('');
   const [findFavorite, setFindFavorite] = useState<boolean>(false);
-  const [item, setItem] = useState<FormatItem[]>([]);
+  const [item, setItem] = useState<Sneaker[]>([]);
 
   const handleSubmit = (e: string): void => {
     setSearch(e);
-    const possibility = favorite.filter((sneaker) => sneaker.name.toLowerCase().includes(e.toLowerCase()));
+    const possibility = favorites.favorite.filter((sneaker) => sneaker.name.toLowerCase().includes(e.toLowerCase()));
 
     if (possibility.length > 0) {
       setFindFavorite(true);
@@ -31,7 +20,6 @@ export function FavoriteNotEmpty() {
       setItem([]);
     }
   }
-
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen gap-5 px-5">
@@ -47,7 +35,7 @@ export function FavoriteNotEmpty() {
       </form>
       <div className="w-full flex flex-wrap items-center justify-center gap-4 mt-10">
         {search === '' ? (
-          favorite.map((sneaker) => (
+          favorites.favorite.map((sneaker) => (
             <div
               className="flex flex-row items-center justify-between shadow-lg p-4 gap-2 min-w-[350px] max-w-[350px]"
               key={sneaker.id}>
@@ -64,16 +52,16 @@ export function FavoriteNotEmpty() {
                     <li className="flex gap-2">
                       {sneaker.size.map((size, id) => (
                         <label
-                          className="relative flex items-center justify-center"
-                          key={id}>
-                          <input
-                            type="checkbox"
-                            name={`optionsSizer_${sneaker.id}`}
-                            onClick={() => chooseSize(sneaker.id, size)}
-                            className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
-                          />
-                          <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
-                        </label>
+                        className="relative flex items-center justify-center"
+                        key={id}>
+                        <input
+                          type="checkbox"
+                          name={`optionsSizer_${sneaker.id}`}
+                          onClick={() => chooseSize.chooseSize(sneaker.id, size)}
+                          className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
+                        />
+                        <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
+                      </label>
                       ))}
                     </li>
 
@@ -85,12 +73,12 @@ export function FavoriteNotEmpty() {
                 <i className="text-[#f30000] text-[20px] fa-solid fa-heart py-[5.5px]"></i>
                 <div className="flex flex-col items-center justify-center gap-2 mb-3">
                   <button
-                    onClick={() => deleteWish(sneaker)}
+                    onClick={() => favorites.removeFromFavorite(sneaker)}
                     className="flex items-center justify-center">
                     <i className="block hover:text-[#f30000] duration-500 fa-solid fa-trash"></i>
                   </button>
                   <button
-                    onClick={() => addedToCart(sneaker)}
+                    onClick={() => shopCart.addToCart(sneaker)}
                     className="flex items-center justify-center">
                     <i className="block hover:text-[#008EF1] duration-500 fa-solid fa-cart-shopping"></i>
                   </button>
@@ -122,7 +110,7 @@ export function FavoriteNotEmpty() {
                             <input
                               type="checkbox"
                               name={`optionsSizer_${sneaker.id}`}
-                              onClick={() => chooseSize(sneaker.id, size)}
+                              onClick={() => chooseSize.chooseSize(sneaker.id, size)}
                               className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
                             />
                             <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
@@ -138,12 +126,12 @@ export function FavoriteNotEmpty() {
                   <i className="text-[#f30000] text-[20px] fa-solid fa-heart py-[5.5px]"></i>
                   <div className="flex flex-col items-center justify-center gap-2 mb-3">
                     <button
-                      onClick={() => deleteWish(sneaker)}
+                      onClick={() => favorites.removeFromFavorite(sneaker)}
                       className="flex items-center justify-center">
                       <i className="block hover:text-[#f30000] duration-500 fa-solid fa-trash"></i>
                     </button>
                     <button
-                      onClick={() => addedToCart(sneaker)}
+                      onClick={() => shopCart.addToCart(sneaker)}
                       className="flex items-center justify-center">
                       <i className="block hover:text-[#008EF1] duration-500 fa-solid fa-cart-shopping"></i>
                     </button>

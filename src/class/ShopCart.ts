@@ -1,14 +1,13 @@
 import { Cart } from "../interface/cart";
-import { CartItem } from "../interface/cartItem";
 import { Sneaker } from "../interface/sneaker";
 import { ChooseSize } from "./ChooseSize";
 
 export class ShopCart implements Cart{
-  cart: CartItem[];
-  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  cart: Sneaker[];
+  setCart: React.Dispatch<React.SetStateAction<Sneaker[]>>;
   size: ChooseSize;
 
-  constructor(cart: CartItem[], setCar: React.Dispatch<React.SetStateAction<CartItem[]>>, size: ChooseSize) {
+  constructor(cart: Sneaker[], setCar: React.Dispatch<React.SetStateAction<Sneaker[]>>, size: ChooseSize) {
     this.cart = cart;
     this.setCart = setCar;
     this.size = size;

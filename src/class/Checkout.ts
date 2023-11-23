@@ -1,8 +1,8 @@
 import { Cart } from "../interface/cart";
-import { FinalizedWish } from "../interface/finalizedWish";
+import { FinalizeWish } from "../interface/finalizedWish";
 import { Sneaker } from "../interface/sneaker";
 
-export class Checkout implements FinalizedWish{
+export class Checkout implements FinalizeWish{
   shopCart: Cart;
 
   constructor(shopCart: Cart) {
@@ -23,6 +23,7 @@ export class Checkout implements FinalizedWish{
     })
     this.shopCart.setCart(newCart);
   }
+
   incrementQuantity(sneaker: Sneaker): void {
     const newCart = this.shopCart.cart.map((item) => {
       if (item.id == sneaker.id) {
@@ -33,4 +34,7 @@ export class Checkout implements FinalizedWish{
     this.shopCart.setCart(newCart);
   }
 
+  finalizeWish(): void {
+    throw new Error("Method not implemented.");
+  }
 }

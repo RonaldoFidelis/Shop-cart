@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import { FavoriteEmpty } from "../components/FavoriteEmpty";
 import { FavoriteNotEmpty } from "../components/FavoriteNotEmpty";
-import { CartContext } from "../context/CartContext";
+import { useMain } from "../hooks/useMain";
 
 export function Favorite() {
-  const {favorite} = useContext(CartContext);
+  const {favorites} = useMain();
 
   return (
     <div className="w-full min-h-screen">
-      {favorite.length === 0 ? (
+      {favorites.isEmpty() ? (
         <FavoriteEmpty/>
       ):(
         <FavoriteNotEmpty/>

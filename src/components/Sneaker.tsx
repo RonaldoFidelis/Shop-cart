@@ -1,11 +1,9 @@
-import { useCart } from "../hooks/useCart"
 import { products } from "../data/Products"
-import '../style/SneakerComponents.css'
 import { useMain } from "../hooks/useMain"
+import '../style/SneakerComponents.css'
 
 export function Sneaker() {
-  const {addedToFavorite} = useCart()
-  const {shopCart, chooseSize} = useMain()
+  const {shopCart, chooseSize, favorites} = useMain()
 
   return (
     <section className="w-full flex flex-col items-center justify-center p-5">
@@ -17,7 +15,7 @@ export function Sneaker() {
             key={id}
             className=" relative flex flex-col items-center justify-center bg-[#FFFFFF] w-[200px] h-[300px] rounded-3xl gap-2 shadow-lg">
             <button
-              onClick={() => addedToFavorite(sneaker)}
+              onClick={() => favorites.addedToFavorite(sneaker)}
               className="absolute flex items-center justify-center cursor-pointer top-[10px] right-4"
             >
               <i className="block hover:bg-[#F30000] p-1 rounded-full duration-500 text-[17px] fa-regular fa-heart"></i>
