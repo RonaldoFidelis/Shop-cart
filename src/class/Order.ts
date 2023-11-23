@@ -19,10 +19,10 @@ export class Order implements InterfaceOrder{
   }
 
   cancelOrder(order: ItemOrder): void {
-    throw new Error("Method not implemented.");
+    console.log(order);
   }
   editOrder(order: ItemOrder): void {
-    throw new Error("Method not implemented.");
+    console.log(order);
   }
 
 }
