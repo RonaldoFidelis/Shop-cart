@@ -52,6 +52,31 @@ export class ShopCart implements Cart{
     this.setCart(cart);
   }
 
+  decreaseQuantity(sneaker: Sneaker): void {
+    const newCart = this.cart.map((item) => {
+      if(item.quantity == sneaker.size.length){
+        return {...item};
+      }
+
+      if (item.id == sneaker.id) {
+        return { ...item, quantity: Math.max((item.quantity || 1) - 1, 0) }
+      }
+
+      return item;
+    })
+    this.setCart(newCart);
+  }
+
+  incrementQuantity(sneaker: Sneaker): void {
+    const newCart = this.cart.map((item) => {
+      if (item.id == sneaker.id) {
+        return { ...item, quantity: Math.max((item.quantity || 1) + 1, 0) }
+      }
+      return item;
+    })
+    this.setCart(newCart);
+  }
+
   isEmpty(): boolean {
     return this.cart.length === 0 ? true : false;
   }

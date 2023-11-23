@@ -5,15 +5,17 @@ import { ChooseSize } from "../class/ChooseSize";
 import { Checkout } from "../class/Checkout";
 import { CartContext } from "../context/CartContext";
 import { Favorite } from "../class/Favorite";
+import { Order } from "../class/Order";
 
 export function useMain() {
-  const { cart, setCart, favorite, setFavorite} = useContext(CartContext);
+  const { cart, setCart, favorite, setFavorite, order, setOrder} = useContext(CartContext);
   const [size, setSize] = useState<FormatSize[]>([]);
 
   const chooseSize = new ChooseSize(size, setSize);
   const shopCart = new ShopCart(cart, setCart, chooseSize);
-  const checkout = new Checkout(shopCart);
+  const orders = new Order(order, setOrder);
+  const checkout = new Checkout(shopCart, orders);
   const favorites = new Favorite(favorite, setFavorite);
 
-  return {cart, setCart, shopCart, chooseSize, checkout, favorites}
+  return {cart, setCart, shopCart, chooseSize, checkout, favorites, orders}
 }

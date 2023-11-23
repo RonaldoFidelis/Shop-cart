@@ -1,42 +1,27 @@
 import { Cart } from "../interface/cart";
-import { FinalizeWish } from "../interface/checkout";
+import { InterfaceCheckout } from "../interface/checkout";
+import { ItemOrder } from "../interface/itemOrder";
+import { InterfaceOrder } from "../interface/order";
 import { Sneaker } from "../interface/sneaker";
 
-export class Checkout implements FinalizeWish{
+export class Checkout implements InterfaceCheckout{
   shopCart: Cart;
+  order: InterfaceOrder;
 
-  constructor(shopCart: Cart) {
+  constructor(shopCart: Cart, order: InterfaceOrder) {
     this.shopCart = shopCart;
+    this.order = order;
   }
 
-  decreaseQuantity(sneaker: Sneaker): void {
-    const newCart = this.shopCart.cart.map((item) => {
-      if(item.quantity == sneaker.size.length){
-        return {...item};
-      }
-
-      if (item.id == sneaker.id) {
-        return { ...item, quantity: Math.max((item.quantity || 1) - 1, 0) }
-      }
-
-      return item;
-    })
-    this.shopCart.setCart(newCart);
-  }
-
-  incrementQuantity(sneaker: Sneaker): void {
-    const newCart = this.shopCart.cart.map((item) => {
-      if (item.id == sneaker.id) {
-        return { ...item, quantity: Math.max((item.quantity || 1) + 1, 0) }
-      }
-      return item;
-    })
-    this.shopCart.setCart(newCart);
-  }
-
-  finalizeWish(): void {
-    // enviar para order
-
+  finalizeWish(sneaker: Sneaker[] ,total: number): void {
+    const newOrder: ItemOrder = {
+      item: sneaker.map((sneaker) => ({
+        ...sneaker,
+      })),
+      total: total,
+    };
+    console.log('Nova ordem:',newOrder);
+    console.log(sneaker);
     this.shopCart.clearCart();
   }
 }

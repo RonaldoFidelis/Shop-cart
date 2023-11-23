@@ -1,9 +1,9 @@
 import { Cart } from "./cart";
+import { InterfaceOrder } from "./order";
 import { Sneaker } from "./sneaker";
 
-export interface FinalizeWish {
+export interface InterfaceCheckout {
   shopCart: Cart;
-  decreaseQuantity(sneaker: Sneaker): void;
-  incrementQuantity(sneaker: Sneaker): void;
-  finalizeWish(): void;
+  order: InterfaceOrder;
+  finalizeWish(cart: Sneaker[] ,total: number): void;
 }

@@ -36,13 +36,13 @@ export function CartNotEmpty() {
                   <h1 className="md:text-[18px] font-medium">$ {sneaker.price}</h1>
                   <div className="grid grid-cols-3 items-center justify-center ">
                     <button
-                      onClick={() => checkout.decreaseQuantity(sneaker)}
+                      onClick={() => shopCart.decreaseQuantity(sneaker)}
                       className="col-span-1 flex items-center justify-center hover:bg-slate-300 duration-500 px-2 rounded-l-full">
                       <i className="text-sm fa-solid fa-minus"></i>
                     </button>
                     <h1 className="col-span-1 text-sm flex items-center justify-center">{sneaker.quantity && sneaker.quantity > sneaker.size.length ? sneaker.quantity : sneaker.size.length}</h1>
                     <button
-                      onClick={() => checkout.incrementQuantity(sneaker)}
+                      onClick={() => shopCart.incrementQuantity(sneaker)}
                       className="col-span-1 flex items-center justify-center hover:bg-slate-300 duration-500 px-2 rounded-r-full">
                       <i className="text-sm fa-solid fa-plus"></i>
                     </button>
@@ -78,7 +78,7 @@ export function CartNotEmpty() {
             <h1 className="text-lg font-medium">${total.toFixed(2)}</h1>
           </span>
           <button
-            onClick={() => checkout.finalizeWish()}
+            onClick={() => checkout.finalizeWish(cart, total)}
             className="mt-5 w-full bg-black text-white py-2 font-medium text-lg hover:bg-[#F30000] duration-500">Checkout</button>
         </div>
       </div>

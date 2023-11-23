@@ -1,8 +1,16 @@
-export function Order() {
+import { OrderEmpty } from "../components/OrderEmpty";
+import { OrderNotEmpty } from "../components/OrderNotEmpty";
+import { useMain } from "../hooks/useMain";
 
-  return(
-    <div>
-      Order
+export function Order() {
+  const {orders} = useMain();
+  return (
+    <div className="w-full min-h-screen">
+      {orders.isEmpty() ? (
+        <OrderEmpty/>
+      ):(
+        <OrderNotEmpty/>
+      )}
     </div>
   )
 }
