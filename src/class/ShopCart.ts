@@ -1,0 +1,64 @@
+import { Cart } from "../interface/cart";
+import { CartItem } from "../interface/cartItem";
+import { Sneaker } from "../interface/sneaker";
+import { ChooseSize } from "./ChooseSize";
+
+export class ShopCart implements Cart{
+  cart: CartItem[];
+  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  size: ChooseSize;
+
+  constructor(cart: CartItem[], setCar: React.Dispatch<React.SetStateAction<CartItem[]>>, size: ChooseSize) {
+    this.cart = cart;
+    this.setCart = setCar;
+    this.size = size;
+  }
+
+  addToCart(sneaker: Sneaker): void {
+    if(this.size.size.length == 0){
+      console.error("Por favor, selecione pelo menos um tamanho antes de adicionar ao carrinho.");
+      return;
+    }
+
+    const validSizes = this.size.size.find((s) => s.id === sneaker.id)?.size || [];
+    if (validSizes.length === 0) {
+      console.error("Por favor, selecione um tamanho válido para este item.");
+      return;
+    }
+
+    const index = this.cart.findIndex((item) => item.id === sneaker.id);
+
+    if (index !== -1) {
+      const existingSizes = this.cart[index].size || [];
+      const newSize = validSizes.filter((size) => !existingSizes.includes(size));
+
+      if (newSize.length > 0) {
+        const updatedCart = [...this.cart];
+        updatedCart[index].quantity = (updatedCart[index].quantity || 0) + validSizes.length;
+        updatedCart[index].size = existingSizes.concat(newSize);
+        this.setCart(updatedCart);
+      } else {
+        console.error("Você já adicionou este item ao carrinho com os tamanhos selecionados.");
+      }
+    } else {
+      const newItem = { ...sneaker, quantity: validSizes.length, size: validSizes };
+      this.setCart((prevCart) => [...prevCart, newItem]);
+    }
+    console.log(this.cart);
+    this.size.clearSize();
+  }
+
+  removeFromCart(sneaker: Sneaker): void {
+    const cart = this.cart.filter((item) => item.id !== sneaker.id);
+    this.setCart(cart);
+  }
+
+  isEmpty(): boolean {
+    return this.cart.length === 0 ? true : false;
+  }
+
+  amount(): number {
+    return this.cart.reduce((ac, item) => ac + item.price, 0);
+  }
+
+}

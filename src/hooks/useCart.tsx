@@ -24,7 +24,7 @@ export function useCart() {
   const chooseSize = (id: string, valueSize: number): void => {
     const index = size.findIndex((item) => item.id === id);
 
-    if (index !== -1) { // se retorna  alguma coisa diferente de -1 é verdadeiro
+    if (index !== - 1) { // se retorna  alguma coisa diferente de -1 é verdadeiro
       const updateSize = [...size];
       const currentSize = updateSize[index];
 

@@ -1,14 +1,12 @@
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
 import { CartEmpty } from "../components/CartEmpty";
 import { CartNotEmpty } from "../components/CartNotEmpty";
+import { useMain } from "../hooks/useMain";
 
 export function Cart() {
-  const {cart} = useContext(CartContext);
-
+  const {shopCart} = useMain();
   return (
     <div className="w-full min-h-screen">
-      {cart.length === 0 ? (
+      {shopCart.isEmpty() ? (
         <CartEmpty/>
       ):(
         <CartNotEmpty/>

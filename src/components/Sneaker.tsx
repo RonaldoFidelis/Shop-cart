@@ -1,9 +1,11 @@
 import { useCart } from "../hooks/useCart"
 import { products } from "../data/Products"
 import '../style/SneakerComponents.css'
+import { useMain } from "../hooks/useMain"
 
 export function Sneaker() {
-  const {addedToCart, addedToFavorite, chooseSize} = useCart()
+  const {addedToFavorite} = useCart()
+  const {shopCart, chooseSize} = useMain()
 
   return (
     <section className="w-full flex flex-col items-center justify-center p-5">
@@ -34,7 +36,7 @@ export function Sneaker() {
                       <input
                         type="checkbox"
                         name={`optionsSizer_${sneaker.id}`}
-                        onClick={() => chooseSize(sneaker.id, size)}
+                        onClick={() => chooseSize.chooseSize(sneaker.id, size)}
                         className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
                       />
                       <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
@@ -47,7 +49,7 @@ export function Sneaker() {
             <div className="flex flex-row items-center justify-center gap-2">
               <button
                 className="flex items-center justify-center cursor-pointer"
-                onClick={() => addedToCart(sneaker)}>
+                onClick={() => shopCart.addToCart(sneaker)}>
                 <p
                   className="text-[15px] font-medium block bg-slate-200 px-2 py-1 rounded-md hover:bg-slate-300 duration-500">Add to cart</p>
               </button>

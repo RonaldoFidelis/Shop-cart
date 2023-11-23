@@ -4,22 +4,17 @@ import nikeAirBranco from '../assets/products-img/nike-air-branco.png'
 import nikeAirAmarelo from '../assets/products-img/nike-air-amarelo.png'
 import yeezy700 from '../assets/products-img/Yeezy-700.png'
 import chunkyDunky from '../assets/products-img/chunky-dunky.png'
+import { Database } from '../interface/database'
 
-export const products: {
-  img: string;
-  name: string;
-  color: string;
-  price: number;
-  size: number[];
-  id: string;
-}[] = [
+export const products: Database[] = [
     {
       'img': jordan1,
       'name': 'Air Jordan 1',
       'color': 'Red/Black',
       'price': 4500,
       'size': [44, 46,48],
-      'id': '1'
+      'id': '1',
+      'quantity': 0
     },
     {
       'img': jordan4,
@@ -27,7 +22,8 @@ export const products: {
       'color': 'Red/Black',
       'price': 2500,
       'size': [44, 45, 46],
-      'id': '2'
+      'id': '2',
+      'quantity': 0
     },
     {
       'img': nikeAirAmarelo,
@@ -35,7 +31,8 @@ export const products: {
       'color': 'White/Yellow',
       'price': 1800,
       'size': [42, 43, 44],
-      'id': '3'
+      'id': '3',
+      'quantity': 0
     },
     {
       'img': nikeAirBranco,
@@ -43,7 +40,8 @@ export const products: {
       'color': 'white/Ocean blue',
       'price': 2000,
       'size': [41, 43, 44],
-      'id': '4'
+      'id': '4',
+      'quantity': 0
     },
     {
       'img': yeezy700,
@@ -51,7 +49,8 @@ export const products: {
       'color': 'Gray/White',
       'price': 6000,
       'size': [42, 43, 45],
-      'id': '5'
+      'id': '5',
+      'quantity': 0
     },
     {
       'img': chunkyDunky,
@@ -59,6 +58,7 @@ export const products: {
       'color': 'Multicolor',
       'price': 6800,
       'size': [42, 43, 45],
-      'id': '6'
+      'id': '6',
+      'quantity': 0
     },
   ];

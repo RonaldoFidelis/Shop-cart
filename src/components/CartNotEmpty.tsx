@@ -1,49 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../context/CartContext";
-
-type TypeSneaker = {
-  img: string;
-  name: string;
-  color: string;
-  price: number;
-  size: number[];
-  id: string;
-  quantity: number;
-}
+import { useEffect, useState } from "react";
+import { useMain } from "../hooks/useMain";
 
 export function CartNotEmpty() {
-  const { cart, setCart } = useContext(CartContext);
-  const [total, setTotal] = useState<number | null>(null);
-
-  const decreaseQuantity = (sneaker: TypeSneaker): void => {
-    const newCart = cart.map((item) => {
-      if(item.quantity == sneaker.size.length){
-        return {...item};
-      }
-
-      if (item.id == sneaker.id) {
-        return { ...item, quantity: Math.max((item.quantity || 1) - 1, 0) }
-      }
-
-      return item;
-    })
-    setCart(newCart);
-  }
-
-  const incrementQuantity = (sneaker: TypeSneaker): void => {
-    const newCart = cart.map((item) => {
-      if (item.id == sneaker.id) {
-        return { ...item, quantity: Math.max((item.quantity || 1) + 1, 0) }
-      }
-      return item;
-    })
-    setCart(newCart);
-  }
-
-  const deleteWish = (sneaker: TypeSneaker): void => {
-    const newCart = cart.filter((item) => item.id != sneaker.id)
-    setCart(newCart);
-  }
+  const {cart, shopCart, checkout } = useMain();
+  const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
     const total = (): void => {
@@ -51,7 +11,7 @@ export function CartNotEmpty() {
       setTotal(temp);
     }
     total();
-  }, [cart])
+  }, [cart]);
 
   return (
     <div className="w-full min-h-screen pt-20">
@@ -76,13 +36,13 @@ export function CartNotEmpty() {
                   <h1 className="md:text-[18px] font-medium">$ {sneaker.price}</h1>
                   <div className="grid grid-cols-3 items-center justify-center ">
                     <button
-                      onClick={() => decreaseQuantity(sneaker)}
+                      onClick={() => checkout.decreaseQuantity(sneaker)}
                       className="col-span-1 flex items-center justify-center hover:bg-slate-300 duration-500 px-2 rounded-l-full">
                       <i className="text-sm fa-solid fa-minus"></i>
                     </button>
-                    <h1 className="col-span-1 text-sm flex items-center justify-center">{sneaker.quantity > sneaker.size.length ? sneaker.quantity : sneaker.size.length}</h1>
+                    <h1 className="col-span-1 text-sm flex items-center justify-center">{sneaker.quantity && sneaker.quantity > sneaker.size.length ? sneaker.quantity : sneaker.size.length}</h1>
                     <button
-                      onClick={() => incrementQuantity(sneaker)}
+                      onClick={() => checkout.incrementQuantity(sneaker)}
                       className="col-span-1 flex items-center justify-center hover:bg-slate-300 duration-500 px-2 rounded-r-full">
                       <i className="text-sm fa-solid fa-plus"></i>
                     </button>
@@ -90,7 +50,7 @@ export function CartNotEmpty() {
                 </div>
               </div>
               <button
-                onClick={() => deleteWish(sneaker)}
+                onClick={() => shopCart.removeFromCart(sneaker)}
                 className="flex items-center mx-5">
                 <i className=" block text-lg hover:text-[#F30000] duration-500 fa-solid fa-trash"></i>
               </button>
@@ -102,7 +62,7 @@ export function CartNotEmpty() {
           <ul className="w-full py-2">
             <li className="flex items-center justify-between px-2">
               <span className="">Subtotal</span>
-              <span className="">${total?.toFixed(2)}</span>
+              <span className="">${total.toFixed(2)}</span>
             </li>
             <li className="flex items-center justify-between px-2">
               <span>Freight</span>
@@ -115,7 +75,7 @@ export function CartNotEmpty() {
           </ul>
           <span className="w-full h-10 bg-black text-white flex items-center justify-between px-2">
             <h1 className="text-lg font-medium">Total</h1>
-            <h1 className="text-lg font-medium">${total?.toFixed(2)}</h1>
+            <h1 className="text-lg font-medium">${total.toFixed(2)}</h1>
           </span>
           <button className="mt-5 w-full bg-black text-white py-2 font-medium text-lg hover:bg-[#F30000] duration-500">Checkout</button>
         </div>
