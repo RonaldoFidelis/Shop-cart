@@ -9,6 +9,7 @@ export interface Cart {
   removeFromCart(sneaker: Sneaker): void;
   isEmpty(): boolean;
   amount(): number;
+  clearCart(): void;
 }
 
 

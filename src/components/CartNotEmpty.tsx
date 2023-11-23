@@ -77,7 +77,9 @@ export function CartNotEmpty() {
             <h1 className="text-lg font-medium">Total</h1>
             <h1 className="text-lg font-medium">${total.toFixed(2)}</h1>
           </span>
-          <button className="mt-5 w-full bg-black text-white py-2 font-medium text-lg hover:bg-[#F30000] duration-500">Checkout</button>
+          <button
+            onClick={() => checkout.finalizeWish()}
+            className="mt-5 w-full bg-black text-white py-2 font-medium text-lg hover:bg-[#F30000] duration-500">Checkout</button>
         </div>
       </div>
     </div>

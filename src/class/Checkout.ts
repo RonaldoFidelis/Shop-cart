@@ -1,5 +1,5 @@
 import { Cart } from "../interface/cart";
-import { FinalizeWish } from "../interface/finalizedWish";
+import { FinalizeWish } from "../interface/checkout";
 import { Sneaker } from "../interface/sneaker";
 
 export class Checkout implements FinalizeWish{
@@ -35,6 +35,8 @@ export class Checkout implements FinalizeWish{
   }
 
   finalizeWish(): void {
-    throw new Error("Method not implemented.");
+    // enviar para order
+
+    this.shopCart.clearCart();
   }
 }

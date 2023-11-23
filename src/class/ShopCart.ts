@@ -60,4 +60,7 @@ export class ShopCart implements Cart{
     return this.cart.reduce((ac, item) => ac + item.price, 0);
   }
 
+  clearCart(): void {
+    this.setCart([]);
+  }
 }
