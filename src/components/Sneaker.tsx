@@ -34,7 +34,6 @@ export function Sneaker() {
                     >
                       <input
                         type="checkbox"
-                        value={size}
                         name={`optionsSizer_${sneaker.id}`}
                         checked={chooseSize.checkbox.some((item) => item.id === sneaker.id && item.size.includes(size))}
                         onChange={() => chooseSize.chooseSize(sneaker.id, size)}

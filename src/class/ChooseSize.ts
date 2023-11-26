@@ -16,7 +16,7 @@ export class ChooseSize {
   }
 
   controlCheckbox(id: string, valueSize: number): void{
-    const index = this.checkbox.findIndex((checked) => checked.id = id);
+    const index = this.checkbox.findIndex((checked) => checked.id === id);
 
     if (index !== -1) {
       const currentChecked = [...this.checkbox];
@@ -29,15 +29,13 @@ export class ChooseSize {
     } else {
       this.setCheckbox((previus) => [...previus, {id: id, size: [valueSize]}]);
     }
-
-    console.log("Checkbox: ", this.checkbox[0]);
   }
 
   chooseSize = (id: string, valueSize: number): void => {
+    this.controlCheckbox(id, valueSize);
     const index = this.size.findIndex((item) => item.id === id);
 
     if (index !== -1) {
-      this.controlCheckbox(id, valueSize);
       const updateSize = [...this.size];
       const currentSize = updateSize[index];
 

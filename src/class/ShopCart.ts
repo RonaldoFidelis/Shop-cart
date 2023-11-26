@@ -45,7 +45,6 @@ export class ShopCart implements Cart{
     }
     console.log(this.cart);
     this.size.clearSize(sneaker.id);
-    console.log("Esse é meu size:", this.size);
   }
 
   removeFromCart(sneaker: Sneaker): void {
