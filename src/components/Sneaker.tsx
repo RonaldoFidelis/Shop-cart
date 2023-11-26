@@ -3,7 +3,7 @@ import { useMain } from "../hooks/useMain"
 import '../style/SneakerComponents.css'
 
 export function Sneaker() {
-  const {shopCart, chooseSize, favorites} = useMain()
+  const { shopCart, chooseSize, favorites } = useMain()
 
   return (
     <section className="w-full flex flex-col items-center justify-center p-5">
@@ -30,16 +30,20 @@ export function Sneaker() {
                   {sneaker.size.map((size, id) => (
                     <label
                       className="relative flex items-center justify-center"
-                      key={id}>
+                      key={id}
+                    >
                       <input
                         type="checkbox"
+                        value={size}
                         name={`optionsSizer_${sneaker.id}`}
-                        onClick={() => chooseSize.chooseSize(sneaker.id, size)}
+                        checked={chooseSize.checkbox.some((item) => item.id === sneaker.id && item.size.includes(size))}
+                        onChange={() => chooseSize.chooseSize(sneaker.id, size)}
                         className="radio-size absolute w-[31px] h-[31px] cursor-pointer z-20 opacity-0"
                       />
                       <span className='select-size min-w-[30px] flex items-center justify-center'>{size}</span>
                     </label>
                   ))}
+
                 </li>
               </ul>
               <h3 className='text-base font-medium'>$ {sneaker.price}</h3>

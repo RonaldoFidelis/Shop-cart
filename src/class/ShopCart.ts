@@ -15,7 +15,7 @@ export class ShopCart implements Cart{
 
   addToCart(sneaker: Sneaker): void {
     if(this.size.size.length == 0){
-      console.error("Por favor, selecione pelo menos um tamanho antes de adicionar ao carrinho.");
+      window.alert("Selecione um tamanho.")
       return;
     }
 
@@ -44,7 +44,8 @@ export class ShopCart implements Cart{
       this.setCart((prevCart) => [...prevCart, newItem]);
     }
     console.log(this.cart);
-    this.size.clearSize();
+    this.size.clearSize(sneaker.id);
+    console.log("Esse é meu size:", this.size);
   }
 
   removeFromCart(sneaker: Sneaker): void {
