@@ -21,7 +21,7 @@ export class ShopCart implements Cart{
 
     const validSizes = this.size.size.find((s) => s.id === sneaker.id)?.size || [];
     if (validSizes.length === 0) {
-      console.error("Por favor, selecione um tamanho válido para este item.");
+      window.alert("Por favor, selecione um tamanho válido para este item.");
       return;
     }
 
@@ -37,7 +37,7 @@ export class ShopCart implements Cart{
         updatedCart[index].size = existingSizes.concat(newSize);
         this.setCart(updatedCart);
       } else {
-        console.error("Você já adicionou este item ao carrinho com os tamanhos selecionados.");
+        window.alert("Você já adicionou o sneaker ao carrinho.");
       }
     } else {
       const newItem = { ...sneaker, quantity: validSizes.length, size: validSizes };
