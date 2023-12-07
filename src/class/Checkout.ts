@@ -4,6 +4,7 @@ import { ItemOrder } from "../interface/itemOrder";
 import { InterfaceOrder } from "../interface/order";
 import { Sneaker } from "../interface/sneaker";
 import { Redirector } from "./Redirector";
+import { v4 as uuidv4 } from 'uuid';
 
 export class Checkout implements InterfaceCheckout{
   shopCart: Cart;
@@ -18,6 +19,7 @@ export class Checkout implements InterfaceCheckout{
 
   finalizeWish(sneaker: Sneaker[] ,total: number): void {
     const newOrder: ItemOrder = {
+      id:uuidv4(),
       item: sneaker.map((sneaker) => ({
         ...sneaker,
       })),
