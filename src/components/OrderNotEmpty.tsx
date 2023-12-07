@@ -149,7 +149,7 @@ export function OrderNotEmpty() {
           contentLabel="Order Details"
           style={{
             content: {
-              maxWidth: '450px',
+              maxWidth: '500px',
               maxHeight: '550px',
               margin: 'auto',
             },
@@ -165,14 +165,14 @@ export function OrderNotEmpty() {
               </div>
               {selectedOrder.item.map((item) => (
                 <div className="flex px-3 py-4" key={item.name}>
-                  <div className='flex max-w-[115px] max-h-[115px] items-center justify-center overflow-hidden bg-black rounded-lg p-2'>
+                  <div className='flex max-w-[100px] max-h-[100px] items-center justify-center overflow-hidden bg-black rounded-lg p-2'>
                     <img className='w-[100%]' src={item.img} alt={item.name} />
                   </div>
                   <div className="flex flex-col p-2">
                     <h2 className="md:text-lg font-medium flex items-center">{item.name}</h2>
                     <h3 className="md:text-base font-normal flex items-center">{item.color}</h3>
                     <p className="md:text-sm font-normal flex items-center">x{item.size.length}</p>
-                    <span>Size:{item.size.map((size, key) => (
+                    <span className="flex flex-wrap">Size:{item.size.map((size, key) => (
                       <span
                         key={key}
                         className="p-1 rounded-md bg-slate-200 hover:bg-slate-300 duration-500 mx-1 text-sm font-light">{size}</span>
