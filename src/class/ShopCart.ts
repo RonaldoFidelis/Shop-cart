@@ -1,19 +1,16 @@
 import { Cart } from "../interface/cart";
 import { Sneaker } from "../interface/sneaker";
 import { ChooseSize } from "./ChooseSize";
-import { Redirector } from "./Redirector";
 
 export class ShopCart implements Cart{
   cart: Sneaker[];
   setCart: React.Dispatch<React.SetStateAction<Sneaker[]>>;
   size: ChooseSize;
-  redirector: Redirector;
 
-  constructor(cart: Sneaker[], setCar: React.Dispatch<React.SetStateAction<Sneaker[]>>, size: ChooseSize, redirector: Redirector) {
+  constructor(cart: Sneaker[], setCar: React.Dispatch<React.SetStateAction<Sneaker[]>>, size: ChooseSize) {
     this.cart = cart;
     this.setCart = setCar;
     this.size = size;
-    this.redirector = redirector;
   }
 
   addToCart(sneaker: Sneaker): void {
@@ -39,14 +36,12 @@ export class ShopCart implements Cart{
         updatedCart[index].quantity = (updatedCart[index].quantity || 0) + validSizes.length;
         updatedCart[index].size = existingSizes.concat(newSize);
         this.setCart(updatedCart);
-        this.redirector.navigateToCart();
       } else {
         window.alert("Você já adicionou o sneaker ao carrinho.");
       }
     } else {
       const newItem = { ...sneaker, quantity: validSizes.length, size: validSizes };
       this.setCart((prevCart) => [...prevCart, newItem]);
-      this.redirector.navigateToCart();
     }
     console.log(this.cart);
     this.size.clearSize(sneaker.id);

@@ -16,9 +16,9 @@ export function useMain() {
   const redirector = new Redirector();
 
   const chooseSize = new ChooseSize(size, setSize, checkbox, setCheckbox);
-  const shopCart = new ShopCart(cart, setCart, chooseSize, redirector);
+  const shopCart = new ShopCart(cart, setCart, chooseSize);
   const orders = new Order(order, setOrder);
-  const checkout = new Checkout(shopCart, orders);
+  const checkout = new Checkout(shopCart, orders, redirector);
   const favorites = new Favorite(favorite, setFavorite);
 
   return {cart, setCart, shopCart, chooseSize, checkout, favorites, orders, redirector}

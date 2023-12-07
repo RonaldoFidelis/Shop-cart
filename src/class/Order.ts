@@ -24,5 +24,4 @@ export class Order implements InterfaceOrder{
   editOrder(order: ItemOrder): void {
     console.log(order);
   }
-
 }
