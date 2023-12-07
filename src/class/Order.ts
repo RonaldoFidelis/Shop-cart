@@ -24,8 +24,9 @@ export class Order implements InterfaceOrder {
 
   }
 
-  cancelOrder(): void {
-    console.log("Order canceled");
+  cancelOrder(order: ItemOrder): void {
+    const orderActualy = this.order.filter((item) => item.id !== order.id);
+    this.setOrder(orderActualy);
   }
 
   editOrder(): void {
