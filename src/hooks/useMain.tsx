@@ -10,7 +10,7 @@ import { Checkbox } from "../interface/checkbox";
 import { Redirector } from "../class/Redirector";
 
 export function useMain() {
-  const { cart, setCart, favorite, setFavorite, order, setOrder} = useContext(CartContext);
+  const {cart, setCart, favorite, setFavorite, order, setOrder} = useContext(CartContext);
   const [size, setSize] = useState<FormatSize[]>([]);
   const [checkbox, setCheckbox] = useState<Checkbox[]>([]);
   const redirector = new Redirector();

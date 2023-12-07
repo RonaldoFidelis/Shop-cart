@@ -24,7 +24,7 @@ export class Checkout implements InterfaceCheckout{
       total: total,
     };
     console.log('Nova ordem:',newOrder);
-    //this.order.receivedOrder();
+    this.order.receivedOrder(newOrder);
     this.shopCart.clearCart();
     this.redirector.navigateToOrder();
   }
