@@ -57,7 +57,7 @@ export function OrderNotEmpty() {
                 </div>
               ))}
               <div className="flex justify-between border-b-2 border-slate-200 mb-3 mx-3">
-                <h2 className="py-2 text-[15px] font-medium">x{e.item.reduce((ac, item) => ac + item.size.length ,0)} item</h2>
+                <h2 className="py-2 text-[15px] font-medium">{e.item.reduce((ac, item) => ac + item.size.length ,0)} item</h2>
                 <h2 className="py-2 text-[15px] font-medium">Total order: R${e.total}</h2>
               </div>
               <div className="flex items-center">
@@ -92,7 +92,7 @@ export function OrderNotEmpty() {
                 </div>
               ))}
               <div className="flex justify-between border-b-2 border-slate-200 mb-3 mx-3">
-                <h2 className="py-2 text-[15px] font-medium">x{e.item.reduce((ac, item) => ac + item.size.length ,0)} item</h2>
+                <h2 className="py-2 text-[15px] font-medium">{e.item.reduce((ac, item) => ac + item.size.length ,0)} item</h2>
                 <h2 className="py-2 text-[15px] font-medium">Total order: R${e.total}</h2>
               </div>
               <div className="flex items-center">
