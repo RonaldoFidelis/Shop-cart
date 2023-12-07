@@ -63,7 +63,7 @@ export function OrderNotEmpty() {
               <div className="flex items-center">
                 <span className="flex items-center mx-3 mb-2 gap-2">
                   <i className="text-teal-800 text-sm fa-solid fa-truck"></i>
-                  <p className="text-teal-800 text-sm">Your order is being shipped</p>
+                  <p className="text-teal-800 text-sm">Your order will be shipped soon</p>
                 </span>
               </div>
             </div>
