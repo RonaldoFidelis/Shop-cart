@@ -3,7 +3,7 @@ import { useMain } from "../hooks/useMain";
 import { ItemOrder } from "../interface/itemOrder";
 import ReactModal from "react-modal";
 
-ReactModal.setAppElement('#root'); // Substitua '#root' pelo ID do seu elemento root
+//ReactModal.setAppElement('#root');
 
 export function OrderNotEmpty() {
   const { orders } = useMain();
@@ -54,7 +54,7 @@ export function OrderNotEmpty() {
         <div className="w-full flex flex-col items-center justify-center gap-5 mt-5 mb-5">
           {search === '' ? (
             orders.order.map((e, key) => (
-              <div className="flex flex-col bg-slate-100 rounded-lg shadow-md" key={key}>
+              <div className="max-w-[450px] min-w-[450px] flex flex-col bg-slate-100 rounded-lg shadow-md" key={key}>
                 <div className="flex justify-between items-center gap-1">
                   <h1 className="mx-3 mt-2 text-base font-medium">#{e.id}</h1>
                   <button
@@ -97,10 +97,13 @@ export function OrderNotEmpty() {
           ) : (
             findOrder ? (
               item.map((e, key) => (
-                <div className="flex flex-col bg-slate-100 rounded-lg shadow-md" key={key}>
+                <div className="max-w-[450px] min-w-[450px] flex flex-col bg-slate-100 rounded-lg shadow-md" key={key}>
                   <div className="flex justify-between items-center gap-1">
                     <h1 className="mx-3 mt-2 text-base font-medium">#{e.id}</h1>
-                    <button className="mx-3 mt-2">
+                    <button
+                      onClick={() => showOrder(e)}
+                      className="mx-3 mt-2"
+                    >
                       <i className="block hover:text-teal-800 duration-500 fa-solid fa-arrow-up-right-from-square"></i>
                     </button>
                   </div>
@@ -182,22 +185,22 @@ export function OrderNotEmpty() {
                 </div>
               ))}
               <div className="flex flex-col mx-3 mb-3 gap-1">
-                 <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1">
                   <i className="text-sm fa-solid fa-house-chimney"></i>
                   <p className="text-sm font-medium">Address</p>
-                 </span>
-                 <p className="text-sm">St. Mark's Place n⁰ 05</p>
-                 <p className="text-sm">Cep: 10001</p>
-                 <p className="text-sm">Recipient: Ronaldo F.</p>
+                </span>
+                <p className="text-sm">St. Mark's Place n⁰ 05</p>
+                <p className="text-sm">Cep: 10001</p>
+                <p className="text-sm">Recipient: Ronaldo F.</p>
               </div>
               <div className="flex flex-col mx-3 mb-3 gap-1">
-                 <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1">
                   <i className="text-sm fa-solid fa-credit-card"></i>
                   <p className="text-sm font-medium">Form of payment</p>
-                 </span>
-                 <p className="text-sm">RONALDO R F S</p>
-                 <p className="text-sm">xxxx xxxx xxxx 5585</p>
-                 <p className="text-sm">Cash</p>
+                </span>
+                <p className="text-sm">RONALDO R F S</p>
+                <p className="text-sm">xxxx xxxx xxxx 5585</p>
+                <p className="text-sm">Cash</p>
               </div>
               <div className="flex justify-between border-b-2 border-slate-200 mb-3 mx-3">
                 <h2 className="py-2 text-[15px] font-medium">{selectedOrder.item.reduce((ac, item) => ac + item.size.length, 0)} item</h2>
@@ -211,14 +214,16 @@ export function OrderNotEmpty() {
                 <p className="mx-3 text-[13px]">Delivery estimate in 10 days ~ 15 days</p>
               </div>
               <div className="flex flex-col gap-2 justify-center items-center pb-5">
-                <button className="border-2 w-full h-[30px]">
+                <button
+                  className="border-2 border-slate-100 w-full h-[30px] cursor-default text-slate-300">
                   Edit order
                 </button>
                 <button
                   onClick={() => cancelOrder(selectedOrder)}
-                  className="border-2 w-full h-[30px]">
+                  className="border-2 w-full h-[30px] hover:bg-[#F30000] duration-700">
                   Cancel order
                 </button>
+                <p className="text-sm text-slate-500">You can still cancel the order</p>
               </div>
             </div>
           )}
